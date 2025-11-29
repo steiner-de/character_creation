@@ -109,6 +109,21 @@ python main.py \
   --level 5
 ```
 
+**Run a character with D&D 5e 2024 enhancements AND subclass:**
+```bash
+python main.py \
+  --name "Eldra Shadowblade" \
+  --sex female \
+  --gender "she/her" \
+  --age_range adult \
+  --occupation "Assassin" \
+  --template_doc_id "YOUR_TEMPLATE_DOC_ID" \
+  --species Half-Elf \
+  --class Rogue \
+  --subclass "Arcane Trickster" \
+  --level 7
+```
+
 **Deactivate virtual environment when done:**
 ```powershell
 # PowerShell
@@ -136,9 +151,14 @@ See `DEACTIVATE_VENV.md` for more deactivation options.
 **D&D 5e 2024 Enhancement Arguments (optional):**
 - `--species`: D&D species - `Human`, `Elf`, `Dwarf`, `Halfling`, `Dragonborn`, `Gnome`, `Half-Elf`, `Half-Orc`, `Tiefling`, `Orc`, `Goblin`, `Kenku`, `Tabaxi`, `Aasimar`, `Genasi`
 - `--class`: D&D class - `Barbarian`, `Bard`, `Cleric`, `Druid`, `Fighter`, `Monk`, `Paladin`, `Ranger`, `Rogue`, `Sorcerer`, `Warlock`, `Wizard`, `Artificer`, `Blood Hunter`
+- `--subclass`: D&D subclass (optional, must match the chosen class). Examples:
+  - **Fighter subclasses:** Champion, Battle Master, Eldritch Knight, Samurai, Rune Knight, Echo Knight
+  - **Rogue subclasses:** Thief, Assassin, Arcane Trickster, Inquisitive, Swashbuckler, Phantom
+  - **Wizard subclasses:** Abjuration, Conjuration, Divination, Enchantment, Evocation, Necromancy
+  - And many more for each class!
 - `--level`: Character level (1-20)
 
-**Note:** All three D&D parameters (`--species`, `--class`, `--level`) must be provided together to enable D&D enhancements.
+**Note:** All three base D&D parameters (`--species`, `--class`, `--level`) must be provided together to enable D&D enhancements. Subclass is optional but must be valid for the chosen class.
 
 ### Output
 
@@ -150,9 +170,10 @@ See `DEACTIVATE_VENV.md` for more deactivation options.
 
 Example CSV output:
 ```
-name,sex,gender,age_range,occupation,species,class,level,doc_url,created_at
-Astra Moon,female,she/her,adult,Starship Pilot,,,https://docs.google.com/document/d/ABC123/edit,2025-11-28T12:34:56.789012
-Bram Ironforge,male,he/him,adult,Warrior,Dwarf,Fighter,5,https://docs.google.com/document/d/DEF456/edit,2025-11-28T12:35:10.123456
+name,sex,gender,age_range,occupation,species,class,subclass,level,doc_url,created_at
+Astra Moon,female,she/her,adult,Starship Pilot,,,,,https://docs.google.com/document/d/ABC123/edit,2025-11-29T12:34:56.789012
+Bram Ironforge,male,he/him,adult,Warrior,Dwarf,Fighter,,5,https://docs.google.com/document/d/DEF456/edit,2025-11-29T12:35:10.123456
+Eldra Shadowblade,female,she/her,adult,Assassin,Half-Elf,Rogue,Arcane Trickster,7,https://docs.google.com/document/d/GHI789/edit,2025-11-29T12:36:20.456789
 ```
 
 ## File Structure
@@ -215,10 +236,16 @@ character_creation/
    python main.py --name "Bram" --sex male --gender "he/him" --age_range adult --occupation "Blacksmith" --template_doc_id "1a2B3c4D5e6F7g8H9i0J" --species Dwarf --class Fighter --level 3
    ```
 
-5. **Check results**:
+5. **OR Run with D&D 5e 2024 subclass** for enhanced mechanics:
+   ```bash
+   python main.py --name "Eldra" --sex female --gender "she/her" --age_range adult --occupation "Spy" --template_doc_id "1a2B3c4D5e6F7g8H9i0J" --species Half-Elf --class Rogue --subclass "Arcane Trickster" --level 5
+   ```
+
+6. **Check results**:
    - New doc link printed to console
    - `characters.csv` updated with metadata
    - If D&D parameters provided, character sheet includes mechanics and abilities
+   - If subclass provided, enhanced with subclass-specific features
 
 ## Troubleshooting
 

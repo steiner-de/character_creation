@@ -2,8 +2,11 @@
 
 import csv
 import os
+import logging
 from datetime import datetime
 from typing import Optional
+
+logger = logging.getLogger('character_creation')
 
 
 def append_character_record(
@@ -16,7 +19,8 @@ def append_character_record(
     doc_url: str,
     species: Optional[str] = None,
     character_class: Optional[str] = None,
-    level: Optional[int] = None
+    level: Optional[int] = None,
+    subclass: Optional[str] = None
 ):
     """Append a character creation record to the CSV file.
     
@@ -31,10 +35,11 @@ def append_character_record(
         species: Optional D&D species
         character_class: Optional D&D class
         level: Optional D&D level
+        subclass: Optional D&D subclass
     """
     header = [
         'name', 'sex', 'gender', 'age_range', 'occupation',
-        'species', 'class', 'level', 'doc_url', 'created_at'
+        'species', 'class', 'subclass', 'level', 'doc_url', 'created_at'
     ]
     exists = os.path.exists(csv_path)
     
@@ -46,6 +51,7 @@ def append_character_record(
         'occupation': occupation,
         'species': species or '',
         'class': character_class or '',
+        'subclass': subclass or '',
         'level': level or '',
         'doc_url': doc_url,
         'created_at': datetime.utcnow().isoformat()
@@ -55,4 +61,6 @@ def append_character_record(
         writer = csv.DictWriter(fh, fieldnames=header)
         if not exists:
             writer.writeheader()
+            logger.debug(f"CSV file created: {csv_path}")
         writer.writerow(row)
+        logger.info(f"Character record added to CSV: {name} ({species} {character_class if character_class else 'generic'})")

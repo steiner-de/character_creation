@@ -27,6 +27,10 @@ build/
 .env
 .env.local
 
+# Logs
+logs/
+*.log
+
 # CSV output
 characters.csv
 
