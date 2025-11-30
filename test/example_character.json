@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "new_doc_title": "Elara - The Forest Ranger",
+    "json_output": true
+  },
+  "Demographics": {
+    "name": "Elara Moonwhisper",
+    "titles": "Ranger of the Northern Woods",
+    "age": "young adult",
+    "sex/gender": "female|she/her",
+    "pronouns": "she/her",
+    "ethnicity": "Half-Elf",
+    "occupation": "Ranger",
+    "socioeconomic status": "Middle class",
+    "education": "Self-taught by nature"
+  },
+  "Physical Appearance": {
+    "eye color": "Emerald green",
+    "skin color": "Light olive",
+    "hair color": "Silver-blonde",
+    "height": "5'8\"",
+    "weight": "130 lbs",
+    "body type": "Athletic and lean",
+    "fitness level": "Excellent",
+    "tattoos": "Runes along her left arm",
+    "scars/birthmarks": "Small scar above left eye",
+    "fashion style": "Leather armor and practical wilderness gear",
+    "accessories": "Bow, quiver, silver pendant"
+  },
+  "History": {
+    "birth date": "Spring of Year 342",
+    "place of birth": "Silverwood Forest",
+    "key family members": "Father (Unknown), Mother (Passed)",
+    "notable family events/milestones": "Raised by forest druids",
+    "notable personal events/milestones": "First kill at age 16",
+    "affiliations": "Order of the Forest"
+  },
+  "Psychological Traits": {
+    "personality type": "ISFP",
+    "personality traits": "Reserved, observant, compassionate",
+    "temperament": "Calm and collected",
+    "hobbies": "Tracking, carving, meditation",
+    "skills/talents": "Archery, herbalism, animal communication",
+    "loves": "Nature, solitude, helping the vulnerable",
+    "morals/virtues": "Respect for life, balance with nature"
+  },
+  "Communication": {
+    "languages known": "Common, Sylvan, Elvish",
+    "accent": "Slight elvish lilt",
+    "style and pacing of speech": "Measured and thoughtful"
+  },
+  "Strengths, Weaknesses, and Abilities": {
+    "physical strengths": "Agility, endurance, marksmanship",
+    "physical abilities": "Tracking, climbing, swimming",
+    "intellectual strengths": "Herb lore, animal behavior, nature magic"
+  },
+  "Relationships": {
+    "best friends": "Theron the Blacksmith",
+    "mentors/teachers": "Sage of the Old Forest"
+  },
+  "Character Growth": {
+    "character archetype": "The Ranger",
+    "core values": "Protection, balance, growth",
+    "goals": "Protect the forest from destruction"
+  }
+}

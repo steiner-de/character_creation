@@ -16,6 +16,17 @@ __pycache__/
 dist/
 build/
 
+# Linting & Code Quality
+.mypy_cache/
+.ruff_cache/
+.pylint/
+htmlcov/
+.coverage
+.coverage.*
+coverage.xml
+*.cover
+.pytest_cache/
+
 # IDE
 .vscode/
 .idea/
@@ -27,12 +38,15 @@ build/
 .env
 .env.local
 
-# Logs
+# Logs & data files
 logs/
+characters.csv
+characters.jsonl
 *.log
 
-# CSV output
-characters.csv
+# Character data
+characters/
+characters.jsonl
 
 # OS
 .DS_Store
