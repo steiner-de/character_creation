@@ -3,7 +3,8 @@
 import logging
 from typing import Optional
 
-from google.cloud import aiplatform
+import vertexai
+from vertexai.generative_models import GenerativeModel
 
 logger = logging.getLogger('character_creation')
 
@@ -31,18 +32,18 @@ class GeminiClient:
         self.project: str = project
         self.location: str = location
         self.model_name: str = model_name
-        self._model: Optional[aiplatform.TextGenerationModel] = None
+        self._model: Optional[GenerativeModel] = None
         
         logger.debug(
             f"GeminiClient initialized with model: {model_name} "
             f"(project: {project}, location: {location})"
         )
 
-    def _initialize_model(self) -> aiplatform.TextGenerationModel:
-        """Initialize the Vertex AI model if not already loaded.
+    def _initialize_model(self) -> GenerativeModel:
+        """Initialize the Vertex AI Generative model if not already loaded.
         
         Returns:
-            The loaded TextGenerationModel instance
+            The loaded GenerativeModel instance
             
         Raises:
             Exception: If model initialization fails
@@ -55,11 +56,9 @@ class GeminiClient:
             f"location={self.location}"
         )
         try:
-            aiplatform.init(project=self.project, location=self.location)
+            vertexai.init(project=self.project, location=self.location)
             logger.debug(f"Loading model: {self.model_name}")
-            self._model = aiplatform.TextGenerationModel.from_pretrained(
-                self.model_name
-            )
+            self._model = GenerativeModel(self.model_name)
             logger.debug("Model loaded successfully")
         except Exception as e:
             logger.error(f"Failed to initialize Vertex AI model: {e}")
@@ -92,10 +91,14 @@ class GeminiClient:
         )
         try:
             model = self._initialize_model()
-            response = model.predict(
+            
+            # Use the generative_models API
+            response = model.generate_content(
                 prompt,
-                temperature=temperature,
-                max_output_tokens=max_output_tokens
+                generation_config={
+                    "temperature": temperature,
+                    "max_output_tokens": max_output_tokens,
+                }
             )
             logger.debug("Generation completed successfully")
         except Exception as e:
@@ -111,10 +114,10 @@ class GeminiClient:
     def _extract_text(response) -> str:
         """Extract text from Gemini response.
         
-        Handles various response types from Vertex AI.
+        Handles various response types from Vertex AI's generative models.
         
         Args:
-            response: Response object from Vertex AI
+            response: Response object from Vertex AI (ContentResponse)
             
         Returns:
             Extracted text string
@@ -122,9 +125,17 @@ class GeminiClient:
         if isinstance(response, str):
             return response
 
-        text = getattr(response, 'text', None)
-        if text:
-            return text
+        # For generative_models API, response has .text attribute
+        if hasattr(response, 'text') and response.text:
+            return response.text
+        
+        # Handle candidates from generative API
+        if hasattr(response, 'candidates') and response.candidates:
+            candidate = response.candidates[0]
+            if hasattr(candidate, 'content') and hasattr(candidate.content, 'parts'):
+                parts = candidate.content.parts
+                if parts and hasattr(parts[0], 'text'):
+                    return parts[0].text
 
         return str(response)
 

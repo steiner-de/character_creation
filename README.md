@@ -304,6 +304,40 @@ character_creation/
 └── README.md             # This file
 ```
 
+## Testing
+
+All tests and example files are organized in the `test/` directory:
+
+### Run Tests
+
+```bash
+# CSV converter unit tests
+python test/test_csv_converter.py
+
+# CSV converter integration tests (with character_input validation)
+python test/test_csv_integration.py
+
+# Character input validation tests
+python test/test_character_input.py
+```
+
+### Test Files & Examples
+
+- **`test/test_csv_converter.py`** - Unit tests for CSV conversion module (15 tests)
+- **`test/test_csv_integration.py`** - Integration tests for CSV → JSON/JSONL → validation
+- **`test/test_character_input.py`** - Input validation tests
+- **`test/example_character.json`** - Single character example
+- **`test/example_characters.csv`** - CSV format with 5 example characters
+- **`test/example_characters.jsonl`** - JSONL format example
+- **`test/test_*.json`** - Test output files from previous runs
+
+### Test Results Summary
+
+- ✅ 15/15 CSV converter unit tests passing
+- ✅ All CSV integration tests passing (validation → JSON → JSONL)
+- ✅ All 10 CSV columns matched to template
+- ✅ 5 example characters converted and validated
+
 ## Example Workflow
 
 1. **Prepare a template** in Google Docs with placeholders:
@@ -399,9 +433,9 @@ bandit -r src/
 
 ### Documentation
 
-For complete linting documentation and setup, see:
-- **[LINTING.md](LINTING.md)** - Comprehensive linting guide and tool reference
-- **[CODE_QUALITY.md](CODE_QUALITY.md)** - Code standards and best practices
+- **[JSON_INPUT.md](JSON_INPUT.md)** - JSON/JSONL input system and batch character creation
+- **[CSV_CONVERTER.md](CSV_CONVERTER.md)** - Convert CSV files to JSON/JSONL format
+- **[LINTING.md](LINTING.md)** - Code quality, formatting, and linting tools
 
 ### Pre-commit Hooks
 
